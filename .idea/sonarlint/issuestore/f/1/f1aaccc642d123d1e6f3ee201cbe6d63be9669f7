@@ -1,0 +1,16 @@
+
+asquid:UselessImportCheck"1Remove this unused import 'java.io.OutputStream'.(Ó ³ÿÿÿÿÿ8¾¶ÔŸü,
+\
+squid:S106·"9Replace this use of System.out or System.err by a logger.(Á°ïøÿÿÿÿ8ô‘¾½ø,
+[squid:UselessImportCheck"0Remove this unused import 'java.io.InputStream'.(¹»º8¾¶ÔŸü,
+fsquid:UselessImportCheck"6Remove this unused import 'org.omg.CORBA.OBJ_ADAPTER'.(Çğ¯¹øÿÿÿÿ8¾¶ÔŸü,
+V
+squid:S106®"9Replace this use of System.out or System.err by a logger.(ƒÚáB8ô‘¾½ø,
+Xsquid:UselessImportCheck"-Remove this unused import 'com.wxp.WxConfig'.(«ÿİ×8¾¶ÔŸü,
+hsquid:S4488Y"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(è¨8¾¶ÔŸü,
+ksquid:S44884"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ÜÜß…ÿÿÿÿÿ8¾¶ÔŸü,
+`squid:UselessImportCheck"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8¾¶ÔŸü,
+ksquid:S4488I"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(±Ëİ†ùÿÿÿÿ8¾¶ÔŸü,
+Tsquid:UselessImportCheck")Remove this unused import 'jxl.demo.XML'.(ˆìßš8¾¶ÔŸü,
+tsquid:UselessImportCheck"DRemove this unused import 'org.apache.commons.collections.MapUtils'.(ÿšÜ…ıÿÿÿÿ8ä×„òü,
+^squid:UselessImportCheck ".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8ä×„òü,

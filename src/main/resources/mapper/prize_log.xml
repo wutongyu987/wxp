@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxp.dao.PrizeLogDao">
+
+    <!-- 基本列 -->
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="PrizeLogBean" useGeneratedKeys="true" keyProperty="id">
+        insert into prize_log
+        (prize_id,price,buyer_id,address,adname,adphone,status,useflag,insert_time,insert_id)
+        values
+        (#{prizeId},#{price},#{buyerId},#{address},#{adname},#{adphone},#{status},1,now(),#{insertId})
+    </insert>
+
+
+    <insert id="insertUseNum">
+        insert into prize_log
+        (src_id,buyer_id,address)
+        values
+        (#{uid},#{buyerid},#{address})
+    </insert>
+
+
+    <update id="cachePrize">
+        update prize_log SET
+        update_time=now()
+        <if test="price != null">,price=#{price}</if>
+        <if test="province != null">,province=#{province}</if>
+        <if test="city != null">,address=#{city}</if>
+        <if test="postCode != null">,post_code=#{postCode}</if>
+        <if test="buyerId != null">,buyer_id=#{buyerId}</if>
+        <if test="address != null">,address=#{address}</if>
+        <if test="adname != null">,adname=#{adname}</if>
+        <if test="adphone != null">,adphone=#{adphone}</if>
+        <if test="status != null">,status=#{status}</if>
+        <if test="updateId != null">,update_id=#{updateId}</if>
+        where id = #{id} and status=1
+    </update>
+
+
+    <update id="deletePrizeLog">
+        UPDATE prize_log set useflag = '0' WHERE id = #{logId} AND buyer_id = #{buyerId};
+    </update>
+
+
+    <!-- 单个查询 -->
+    <select id="findById" resultType="PrizeLogBean">
+        SELECT
+        *
+        FROM prize_log
+        WHERE useflag=1
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+    </select>
+
+
+
+    <select id="findByBuyerId" resultType="java.util.Map">
+        SELECT
+        a.id,
+        a.prize_id as prizeId,
+        b.pimg,
+        b.name,
+        a.address,
+        a.adphone,
+        a.status
+        FROM
+        prize_log a
+        JOIN prize b ON b.id=a.prize_id
+        WHERE
+        a.useflag = 1
+        <if test="id != null">
+            AND a.buyer_id = #{id}
+        </if>
+        ORDER BY a.insert_time DESC
+    </select>
+
+
+    <!-- 查询所有 -->
+    <select id="findAll"  resultType="PrizeLogBean">
+        SELECT
+        *
+        FROM prize_log
+        WHERE useflag=1
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="query" resultType="java.util.Map" >
+        SELECT
+        a.id,a.prize_id,a.price,a.address,a.adphone,a.adname,a.status,c.name as prizeName,
+        c.start_time,c.end_time,c.insert_time
+        FROM
+        prize_log a
+
+        LEFT JOIN prize c on c.id=a.prize_id
+        WHERE
+        a.useflag = 1
+				<if test="prizeId != null">AND a.prize_id=#{prizeId}</if>
+				<if test="buyerId != null">AND a.buyer_id=#{buyerId}</if>
+				<if test="addressName != null and addressName != '' ">AND b.name like '%${addressName}%'</if>
+				<if test="status != null">AND a.status=#{status}</if>
+        order by a.insert_time desc
+    </select>
+    <select id="getRedPackId" resultType="java.lang.String">
+        SELECT id FROM prize_log WHERE src_id = #{uid};
+    </select>
+
+
+</mapper>

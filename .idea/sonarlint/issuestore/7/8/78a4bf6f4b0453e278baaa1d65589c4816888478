@@ -1,0 +1,12 @@
+
+jsquid:ModifiersOrderCheck("EReorder the modifiers to comply with the Java Language Specification.(ä¢¡œ
+vsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(¾ÄöÄıÿÿÿÿ8èÁÒùû,
+qsquid:ModifiersOrderCheck,"EReorder the modifiers to comply with the Java Language Specification.(ÈÜ³¼8îÚ„òü,
+osquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(ü€Û¾şÿÿÿÿ
+jsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(éÃşÑ
+isquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(³îP
+jsquid:ModifiersOrderCheck)"EReorder the modifiers to comply with the Java Language Specification.(€†½š
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(®¼ÒÈøÿÿÿÿ
+gsquid:CommentedOutCodeLine%"<This block of commented-out lines of code should be removed.(øŠæœıÿÿÿÿ
+Qsquid:S1118":Add a private constructor to hide the implicit public one.(Óùÿ¿
+vsquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(êÓúÿÿÿÿ8Ç¹¡´ø,

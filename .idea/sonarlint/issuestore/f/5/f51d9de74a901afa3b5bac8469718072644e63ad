@@ -1,0 +1,6 @@
+
+_squid:UselessImportCheck
+"4Remove this unused import 'org.slf4j.LoggerFactory'.(–ÿÚÞ8üñ‚¾ø,
+]squid:S1192""FDefine a constant instead of duplicating this literal "buyer" 5 times.(×ù‡•
+Csquid:S2116C"%Use "Arrays.toString(array)" instead.(Ç”—8î¯–¾ø,
+Zsquid:S1155+">Use isEmpty() to check whether the collection is empty or not.(É€°Îøÿÿÿÿ

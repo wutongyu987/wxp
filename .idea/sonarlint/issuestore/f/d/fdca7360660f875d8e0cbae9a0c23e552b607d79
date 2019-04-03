@@ -1,0 +1,5 @@
+
+\squid:UselessImportCheck"3Remove this unused import 'com.wxp.bean.PrizeBean'.(ÖûÙıÿÿÿÿ
+Gsquid:S2140N")Use "java.util.Random.nextInt()" instead.(ã¡Ñ±8Ï¨´ø,
+]squid:S00112<"FDefine and throw a dedicated exception instead of using a generic one.(‰Ö¡,
+jsquid:S00112?"FDefine and throw a dedicated exception instead of using a generic one.(•­†¸ùÿÿÿÿ8¬“´ø,

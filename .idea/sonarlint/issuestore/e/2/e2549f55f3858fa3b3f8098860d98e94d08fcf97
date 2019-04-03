@@ -1,0 +1,9 @@
+
+^squid:S001125"FDefine and throw a dedicated exception instead of using a generic one.(¿Ë¼”
+V
+squid:S106y"9Replace this use of System.out or System.err by a logger.(Êêô€8À‘Òùû,
+jsquid:S00112R"FDefine and throw a dedicated exception instead of using a generic one.(ï²­¤øÿÿÿÿ8ôçÆ¸ø,
+\squid:UselessImportCheck	"3Remove this unused import 'com.wxp.bean.PrizeBean'.(ÖûÙıÿÿÿÿ
+esquid:S00112c"FDefine and throw a dedicated exception instead of using a generic one.(›­Ûé8À‘Òùû,
+]squid:S1192."FDefine a constant instead of duplicating this literal "buyer" 3 times.(×ù‡•
+nsquid:CommentedOutCodeLinez"<This block of commented-out lines of code should be removed.(ş”ÊÑıÿÿÿÿ8À‘Òùû,

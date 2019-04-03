@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxp.dao.AddressDao">
+
+    <!-- 基本列 -->
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="AddressBean" useGeneratedKeys="true" keyProperty="id">
+        insert into address
+        (buyer_id,address,province,city,post_code,name,phone,def,useflag,insert_time,insert_id)
+        values
+        (#{buyerId},#{address},#{province},#{city},#{postCode},#{name},#{phone},#{def},1,now(),#{insertId})
+    </insert>
+
+
+    <!-- 单个更新 -->
+    <update id="update">
+        update address SET
+        update_time=now()
+			<if test="address != null">,address=#{address}</if>
+			<if test="province != null">,province=#{province}</if>
+			<if test="city != null">,city=#{city}</if>
+			<if test="postCode != null">,post_code=#{postCode}</if>
+			<if test="name != null">,name=#{name}</if>
+			<if test="phone != null">,phone=#{phone}</if>
+			<if test="updateId != null">,update_id=#{updateId}</if>
+			<if test="def != null">,def=#{def}</if>
+        where id = #{id} and buyer_id=#{buyerId}
+    </update>
+
+
+    <!-- 删除 -->
+    <update id="deletes" parameterType="AddressBean" >
+        update address
+        SET useflag=0 WHERE buyer_id=#{buyerId} and id IN
+    </update>
+
+    <update id="deleteDef">
+        update address
+        SET def=0 WHERE buyer_id= #{buyerId}
+    </update>
+    <update id="deleteAddressByid">
+        update address set useflag = '0' where buyer_id = #{buyerId} AND id = #{addressId};
+    </update>
+
+
+    <!-- 单个查询 -->
+    <select id="findById" resultType="AddressBean">
+        SELECT
+        *
+        FROM address
+        WHERE useflag=1
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+    </select>
+
+    <select id="findByBuyId" resultType="AddressBean">
+        SELECT
+        *
+        FROM address
+        WHERE useflag=1
+        AND buyer_id = #{buyerId}
+        order by def desc, insert_time desc
+        limit 1
+
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="findAll"  resultType="AddressBean">
+        SELECT
+        *
+        FROM address
+        WHERE useflag=1
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="query" resultType="AddressBean" >
+        SELECT
+        *
+        FROM address
+        WHERE useflag=1
+				<if test="buyerId != null">AND buyer_id=#{buyerId}</if>
+				<if test="address != null">AND address=#{address}</if>
+				<if test="postCode != null">AND post_code=#{postCode}</if>
+				<if test="name != null">AND name=#{name}</if>
+				<if test="phone != null">AND phone=#{phone}</if>
+				<if test="def != null">AND def=#{def}</if>
+        order by def desc
+    </select>
+    <select id="getUserAdressDef" resultType="java.lang.Integer">
+        SELECT def FROM address WHERE buyer_id = #{id};
+    </select>
+    <!--获取用户地址列表-->
+    <select id="getUserAdress" resultType="com.wxp.bean.AddressBean">
+        SELECT * FROM address WHERE buyer_id = #{buyerId} and useflag= 1 ORDER BY def desc;
+    </select>
+
+
+</mapper>

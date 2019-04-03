@@ -1,0 +1,17 @@
+
+Lsquid:S1481Œ"(Remove this unused "acc" local variable.(î‡šëÿÿÿÿÿ8Üü¶·ø,
+esquid:S1075Š"ARefactor your code to get this URI from a customizable parameter.(÷Âéÿÿÿÿÿ8 á¬·ø,
+tsquid:UselessImportCheck"IRemove this unused import 'org.springframework.util.LinkedMultiValueMap'.(µÂî‹8Êµ·ø,
+psquid:UselessImportCheck"@Remove this unused import 'org.springframework.http.HttpMethod'.(Ê¨Ä¡øÿÿÿÿ8Êµ·ø,
+xsquid:UselessImportCheck
+"HRemove this unused import 'org.springframework.web.client.RestTemplate'.(Îö¼Şûÿÿÿÿ8Êµ·ø,
+Gsquid:S1148‚"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8 á¬·ø,
+[squid:S1854Œ"7Remove this useless assignment to local variable "acc".(î‡šëÿÿÿÿÿ8Üü¶·ø,
+Fsquid:S1148;"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8 á¬·ø,
+dsquid:S2147"ECombine this catch with the one at line 126, which has the same body.(ï­£Ä8 á¬·ø,
+tsquid:UselessImportCheck"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8Êµ·ø,
+^squid:UselessImportCheck".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8Êµ·ø,
+Zsquid:UselessImportCheck"*Remove this unused import 'java.util.Map'.(¼è½Òşÿÿÿÿ8Êµ·ø,
+ssquid:UselessImportCheck	"CRemove this unused import 'org.springframework.util.MultiValueMap'.(·ÚÀŞùÿÿÿÿ8Êµ·ø,
+ksquid:UselessImportCheck"@Remove this unused import 'org.springframework.http.HttpEntity'.(ÂéÓ8Êµ·ø,
+Fsquid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8 á¬·ø,

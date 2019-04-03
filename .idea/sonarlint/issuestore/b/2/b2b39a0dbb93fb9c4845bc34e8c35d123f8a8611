@@ -1,0 +1,4 @@
+
+rsquid:UselessImportCheck"IRemove this unused import 'com.sun.xml.internal.ws.api.ha.StickyFeature'.(“´îŒúÿÿÿÿ
+_squid:UselessImportCheck"6Remove this unused import 'org.omg.CORBA.OBJ_ADAPTER'.(Çð¯¹øÿÿÿÿ
+Qsquid:S1191"5Use classes from the Java API instead of Sun classes.(“´îŒúÿÿÿÿ

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxp.dao.PrizeDao">
+
+    <!-- 基本列 -->
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="PrizeBean" useGeneratedKeys="true" keyProperty="id">
+        insert into prize
+        (name,pimg,num,start_time,end_time,useflag,insert_time,insert_id)
+        values
+        (#{name},#{pimg},#{num},#{startTime},#{endTime},1,now(),#{insertId})
+    </insert>
+
+
+    <!-- 单个更新 -->
+    <update id="update">
+        update prize SET
+        update_time = now()
+			<if test="name != null">,name=#{name}</if>
+			<if test="pimg != null">,pimg=#{pimg}</if>
+			<if test="num != null">,num=#{num}</if>
+			<if test="startTime != null">,start_time=#{startTime}</if>
+			<if test="endTime != null">,end_time=#{endTime}</if>
+			<if test="updateId != null">,update_id=#{updateId}</if>
+        where id = #{id}
+    </update>
+
+
+    <!-- 删除 -->
+    <update id="deletes" parameterType="PrizeBean" >
+        update prize
+        SET useflag=0 WHERE id IN
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+        #{id}
+        </foreach>
+    </update>
+
+ <update id="chashById"  >
+        update prize
+        SET num=num-1 WHERE id=#{id}
+
+    </update>
+
+    <!-- 单个查询 -->
+    <select id="findById" resultType="PrizeBean">
+        SELECT
+        *
+        FROM prize
+        WHERE useflag=1
+        <if test="value != null">
+            AND id = #{value}
+        </if>
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="findAll"  resultType="java.util.HashMap">
+        SELECT
+        id,num
+        FROM prize
+        WHERE useflag=1
+    </select>
+
+    <select id="percent" resultType="java.util.HashMap">
+        SELECT
+               a.id,
+               ROUND(a.num/b.ps,6) as ps
+        FROM
+             prize a
+                 JOIN (SELECT SUM(num) as ps FROM prize WHERE useflag=1) as b
+        WHERE
+                a.useflag =1
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="query" resultType="PrizeBean" >
+        SELECT
+        *
+        FROM prize
+        WHERE useflag=1
+				<if test="name != null">AND name=#{name}</if>
+				<if test="pimg != null">AND pimg=#{pimg}</if>
+				<if test="num != null">AND num=#{num}</if>
+				<if test="startTime != null">AND start_time=#{startTime}</if>
+				<if test="endTime != null">AND end_time=#{endTime}</if>
+        ORDER BY insert_time desc
+    </select>
+
+    <select id="getPriceNum" resultType="java.lang.Integer">
+        SELECT num FROM prize WHERE id = #{pId};
+    </select>
+
+
+</mapper>

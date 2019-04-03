@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxp.dao.BuyerDao">
+    <!-- 保存 -->
+    <insert id="save" parameterType="BuyerBean" useGeneratedKeys="true" keyProperty="id">
+        insert into buyer
+        (id,nick_name,open_id,sex,avatar_url,useflag,insert_time,insert_id)
+        values
+        (#{id},#{nickName},#{openId},#{sex},#{avatarUrl},1,now(),#{insertId})
+    </insert>
+
+
+    <!-- 单个更新 -->
+    <update id="update">
+        update buyer SET
+        update_time=now()
+			<if test="nickName != null">,nick_name=#{nickName}</if>
+			<if test="openId != null">,open_id=#{openId}</if>
+			<if test="sex != null">,sex=#{sex}</if>
+			<if test="avatarUrl != null">,avatar_url=#{avatarUrl}</if>
+			<if test="updateId != null">,update_id=#{updateId},</if>
+        where id = #{id}
+    </update>
+
+    <update id="reducePoint">
+         update buyer SET
+         update_time=now(),
+         points=points-${totalFee}
+         WHERE id = #{id}
+    </update>
+
+    <update id="addPoint">
+        update buyer SET
+        update_time=now(),
+        points=points+${totalFee}
+        WHERE id = #{id}
+    </update>
+
+    <update id="zan">
+        UPDATE buyer SET zan=zan+1 WHERE  id=#{id}
+    </update>
+
+    <!-- 删除 -->
+    <update id="deletes" parameterType="BuyerBean" >
+        update buyer
+        SET useflag=0 WHERE id IN
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+        #{id}
+        </foreach>
+    </update>
+
+    <!-- 单个查询 -->
+    <select id="findById" resultType="BuyerBean">
+        SELECT
+        *
+        FROM buyer
+        WHERE useflag=1
+        <if test="id != null">
+            AND id = #{id}
+        </if>
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="findAll"  resultType="BuyerBean">
+        SELECT
+        *
+        FROM buyer
+        WHERE useflag=1
+    </select>
+
+    <!-- 分页查询 -->
+    <select id="query" resultType="BuyerBean" >
+        SELECT
+        *
+        FROM buyer
+        WHERE useflag=1
+				<if test="nickName != null">AND nick_name=#{nickName}</if>
+				<if test="openId != null">AND open_id=#{openId}</if>
+				<if test="sex != null">AND sex=#{sex}</if>
+				<if test="avatarUrl != null">AND avatar_url=#{avatarUrl}</if>
+				<if test="insertTime != null">AND insert_time=#{insertTime}</if>
+				<if test="insertId != null">AND insert_id=#{insertId}</if>
+				<if test="updateTime != null">AND update_time=#{updateTime}</if>
+				<if test="updateId != null">AND update_id=#{updateId}</if>
+    </select>
+
+    <select id="findByOpenId" resultType="BuyerBean" >
+        SELECT
+        *
+        FROM buyer
+        WHERE useflag=1
+        AND open_id=#{openId}
+    </select>
+
+</mapper>

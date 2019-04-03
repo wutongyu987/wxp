@@ -1,0 +1,6 @@
+
+O
+squid:S106 "9Replace this use of System.out or System.err by a logger.(ğ’ª
+„ squid:ForLoopCounterChangedCheck("XRefactor the code in order to not assign to this loop counter from within the loop body.(Ş¼Ş¢
+Tsquid:UselessImportCheck")Remove this unused import 'java.io.File'.(†Ğ¥Å8³Æäºø,
+asquid:S1155,">Use isEmpty() to check whether the collection is empty or not.(É€°Îøÿÿÿÿ8‚¢»ø,

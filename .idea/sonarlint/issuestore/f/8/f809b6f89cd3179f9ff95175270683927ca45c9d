@@ -1,0 +1,18 @@
+
+@squid:S1148»"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+ysquid:S1488f"[Immediately return this expression instead of assigning it to the temporary variable "xml".(ûÂæ8Ø„òü,
+^squid:S2142¡"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+[squid:UselessImportCheck"+Remove this unused import 'com.wxp.Config'.(í¶ŒÄûÿÿÿÿ8Ø„òü,
+ksquid:S1192-"MDefine a constant instead of duplicating this literal "FromUserName" 3 times.(âŒó˜8Ø„òü,
+fsquid:S11920"HDefine a constant instead of duplicating this literal "Content" 3 times.(ğ–Üá8Ø„òü,
+ksquid:S1192k"HDefine a constant instead of duplicating this literal "msgtype" 3 times.(éÒ£Şşÿÿÿÿ8¤³Ñôü,
+^squid:S2142º"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+fsquid:S1192/"HDefine a constant instead of duplicating this literal "MsgType" 3 times.(œìæš8Ø„òü,
+@squid:S1148¢"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+isquid:S1192,"KDefine a constant instead of duplicating this literal "ToUserName" 3 times.(Êí¼¯8Ø„òü,
+nsquid:S1192."KDefine a constant instead of duplicating this literal "CreateTime" 3 times.(´õäèøÿÿÿÿ8Ø„òü,
+jsquid:S00112}"FDefine and throw a dedicated exception instead of using a generic one.(ÀŞ‰©úÿÿÿÿ8Ø„òü,
+ksquid:UselessImportCheck";Remove this unused import 'com.alibaba.fastjson.JSONArray'.(ÿÀâ³ùÿÿÿÿ8Ø„òü,
+isquid:UselessImportCheck	"9Remove this unused import 'com.wxp.common.util.JsonUtil'.(ÓÎ±Îÿÿÿÿÿ8Ø„òü,
+osquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(É¬]
+Vsquid:S1172}"3Remove this unused method parameter "fromUserName".(ÀŞ‰©úÿÿÿÿ8Ø„òü,

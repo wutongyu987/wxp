@@ -1,0 +1,16 @@
+
+?squid:S1148D"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+usquid:UselessImportCheck"ERemove this unused import 'java.util.concurrent.LinkedBlockingQueue'.(ŸØšüÿÿÿÿ8òİ„òü,
+]squid:S1192&"GDefine a constant instead of duplicating this literal "object" 3 times.(î…
+Wsquid:UselessImportCheck",Remove this unused import 'java.util.Queue'.(Äá™ô8òİ„òü,
+O
+squid:S106$"9Replace this use of System.out or System.err by a logger.(Ùœ†ü
+dsquid:S1192q"HDefine a constant instead of duplicating this literal "unknown" 3 times.(í¾şèÿÿÿÿÿ
+O
+squid:S106#"9Replace this use of System.out or System.err by a logger.(œ¸É
+T
+squid:S106h"9Replace this use of System.out or System.err by a logger.(®ıáëûÿÿÿÿ
+O
+squid:S106i"9Replace this use of System.out or System.err by a logger.(Ùœ†ü
+O
+squid:S106g"9Replace this use of System.out or System.err by a logger.(¸¸íÿ

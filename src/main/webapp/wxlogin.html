@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信公众号测试</title>
+    <script type="text/javascript" src="jquery3.js"></script>
+</head>
+<body>
+<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67cadbc58a45b2cd&redirect_uri=https%3a%2f%2fwww.xingyuanji.com%2fwxp%2fwxBase%2flogin&response_type=code&scope=snsapi_base&state=123#wechat_redirect">
+    微信授权不获取用户信息,后台可能返回错误信息
+</a>
+<br/>
+<a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67cadbc58a45b2cd&redirect_uri=https%3a%2f%2fwww.xingyuanji.com%2fwxp%2flogin&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect">
+    微信授权,获取用户信息
+</a>
+
+<button onclick="test()">用户登录验证</button>
+结果22
+<div id="content">啦啦</div>
+
+<script>
+    $(function () {
+        window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67cadbc58a45b2cd&redirect_uri=https%3a%2f%2fwww.xingyuanji.com%2fwxp%2fwxBase%2flogin&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
+    });
+function test() {
+    $.ajax({
+        type: "GET",
+        url:"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67cadbc58a45b2cd&redirect_uri=https%3a%2f%2fwww.xingyuanji.com%2fwxp%2fwxBase%2flogin&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect",
+        success: function(data){
+            console.log(JSON.stringify(data));
+
+        }
+    })
+}
+function tes2() {
+    $.ajax({
+        type: "GET",
+        url:"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67cadbc58a45b2cd&redirect_uri=https%3a%2f%2fwww.xingyuanji.com%2fwxp%2fwxBase%2flogin&response_type=code&scope=snsapi_base&state=123#wechat_redirect",
+        success: function(data){
+            console.log(JSON.stringify(data));
+
+        }
+    })
+}
+
+function test1() {
+    $.ajax({
+        type: "GET",
+        url:"/wxBase/tlogin",
+        success: function(data){
+            console.log(data);
+            $("#content").text(JSON.stringify(data));
+        }
+    })
+}
+</script>
+</body>
+</html>

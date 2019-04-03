@@ -1,0 +1,14 @@
+
+isquid:S00117~"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒøÊì
+?squid:S1148w"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+csquid:CommentedOutCodeLine "<This block of commented-out lines of code should be removed.(ÁóôÜ
+csquid:CommentedOutCodeLine¢"<This block of commented-out lines of code should be removed.(µ¿¦Î
+O
+squid:S106‚"9Replace this use of System.out or System.err by a logger.(Œêð
+hsquid:CommentedOutCodeLinež"<This block of commented-out lines of code should be removed.(ÊÆ…ýÿÿÿÿ
+O
+squid:S106±"9Replace this use of System.out or System.err by a logger.(ƒÚáB
+?squid:S1148c"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+@squid:S1148—"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ
+nsquid:S00117}"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖØýÝüÿÿÿÿ
+jsquid:S2095m"NUse try-with-resources or close this "FileOutputStream" in a "finally" clause.(•ž¸†ûÿÿÿÿ
