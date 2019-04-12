@@ -220,7 +220,7 @@ public class WxMsgService {
         JSONObject list =new JSONObject();
         list.put("title","【猩愿福利】又双叒叕是\"免费\"送 "); //标题
         list.put("description","【猩愿福利】又双叒叕是\"免费\"送 "); //描述
-        list.put("url","https://mp.weixin.qq.com/s?__biz=MzU1ODU1ODEwNg==&tempkey=MTAwNF9uS3U2TGVwZnlFS0dwODVIWnMtMzFvMUd5Q1Z2dWNyS0NtWlVKYUo3QUVGWUhyWTRYQVNuOFVqOF9wOGFpeENkLUlpbk5BVWVvY3FmTFQ3UTBjNFAwUC1BdlpIMC16ZFg5SS13TDlrRElQLUJLanNpU3hybC1YNmVxcDFvSU0yNW45VXlRQ3NqeTd4LXRQMmhtbWw2Vzh2c0c0MURMRUd1NGhLbjZRfn4%3D&chksm=7c25fa564b527340d2cccac79d077058002488fd5d9f2facf82b4a2d509ab68d291a5dce0518#rd"); //点击图文链接跳转的地址
+        list.put("url","https://mp.weixin.qq.com/s?__biz=MzU1ODU1ODEwNg==&mid=2247484617&idx=1&sn=ca494f9f351b8a2558fc417d51a3b1bc&chksm=fc25fa3ccb52732a6e8dcf18091318a85b749a12cd6ff477a419dcc81f45485a11f27d27447b&token=394423510&lang=zh_CN#rd"); //点击图文链接跳转的地址
         list.put("picurl","https://mmbiz.qpic.cn/mmbiz_jpg/GmQkkFCF21W1X74Sa9KOALaa1nx3MAe1NhLYvWR1RF7Kw0LFjey2plh2K5wzSHxdCd9s281uKRPxOorQbuhmyg/0?wx_fmt=jpeg"); //图文链接的图片
         articles.add(list);
         news.put("articles", articles);
