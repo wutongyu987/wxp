@@ -12,6 +12,7 @@ import com.wxp.common.util.OkhttpUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -88,21 +89,24 @@ public class WxMsgService {
     public String eventSubscribe(String eventKey,String fromUserName,String toUserName) throws Exception {
         int currentTime = (int) (System.currentTimeMillis()/1000);
         Map<String,String> xmlMap=null;
-        if (eventKey==null){//用户正常关注，无场景值
-            xmlMap = new HashMap<>();
-            xmlMap.put("ToUserName",toUserName);
-            xmlMap.put("FromUserName",fromUserName);
-            xmlMap.put("CreateTime",currentTime+"");
-            xmlMap.put("MsgType","text");
-            xmlMap.put("Content","猩愿机属于自动贩卖机\n" +
-                    "一个更符合广大群众的\n" +
-                    "一种新颖、智能、方便的新产品\n\n" +
-                    "猩愿机更多的是充满神秘感\n" +
-                    "带有娱乐性质和物超所值\n" +
-                    "并赋予发展机会");
-            String xml = WXPayUtil.mapToXml(xmlMap);
-            return xml;
-        }else if (eventKey.equals("qrscene_0")){
+
+//        if (eventKey==null){//用户正常关注，无场景值
+//            xmlMap = new HashMap<>();
+//            xmlMap.put("ToUserName",toUserName);
+//            xmlMap.put("FromUserName",fromUserName);
+//            xmlMap.put("CreateTime",currentTime+"");
+//            xmlMap.put("MsgType","text");
+////            xmlMap.put("Content","猩愿机属于自动贩卖机\n" +
+////                    "一个更符合广大群众的\n" +
+////                    "一种新颖、智能、方便的新产品\n\n" +
+////                    "猩愿机更多的是充满神秘感\n" +
+////                    "带有娱乐性质和物超所值\n" +
+////                    "并赋予发展机会");
+//            xmlMap.put("Content","回复关键字“猩愿福利”即可获取抽奖参与步骤");
+//            String xml = WXPayUtil.mapToXml(xmlMap);
+//            return xml;
+//        }else
+            if (eventKey.equals("qrscene_0")){
             xmlMap = new HashMap<>();
             xmlMap.put("ToUserName",toUserName);
             xmlMap.put("FromUserName",fromUserName);
@@ -111,8 +115,23 @@ public class WxMsgService {
             xmlMap.put("Content","点击“点击个人中心→扫码兑奖领取现金红包”^_^");
             String xml = WXPayUtil.mapToXml(xmlMap);
             return xml;
+        }else{
+            xmlMap = new HashMap<>();
+            xmlMap.put("ToUserName",toUserName);
+            xmlMap.put("FromUserName",fromUserName);
+            xmlMap.put("CreateTime",currentTime+"");
+            xmlMap.put("MsgType","text");
+//            xmlMap.put("Content","猩愿机属于自动贩卖机\n" +
+//                    "一个更符合广大群众的\n" +
+//                    "一种新颖、智能、方便的新产品\n\n" +
+//                    "猩愿机更多的是充满神秘感\n" +
+//                    "带有娱乐性质和物超所值\n" +
+//                    "并赋予发展机会");
+            xmlMap.put("Content","回复关键字“猩愿福利”即可获取抽奖参与步骤");
+            String xml = WXPayUtil.mapToXml(xmlMap);
+            return xml;
         }
-        return "";
+
     }
 
     /**
@@ -164,6 +183,52 @@ public class WxMsgService {
         }
     }
 
+    public void returnUserMsg(String content, String toUserName, String fromUserName) throws Exception {
+           logger.info(content);
+           logger.info(toUserName);
+            JSONObject send = new JSONObject();
+            send.put("touser",fromUserName);
+            send.put("msgtype","text");
+            JSONObject textObj = new JSONObject();
+            textObj.put("content","感谢猩宝宝的支持!\n"+"请完成以下步骤方可参与抽奖活动：\n"+"1、将下文分享至朋友圈，分享时不得设置分组或不可见。\n"
+                                    +"2、保存截图发送至本公众号，并回复“报名”。\n"+"注意：截图重复将被取消资格。\n");
+            send.put("text",textObj);
+            logger.info("put"+send.toJSONString());
+            dealQueue.put(send);
+    }
+
+    public void returnUserBaoMingMsg(String content, String toUserName, String fromUserName) throws Exception {
+        logger.info(content);
+
+        JSONObject send = new JSONObject();
+        send.put("touser",fromUserName);
+        send.put("msgtype","text");
+        JSONObject textObj = new JSONObject();
+        textObj.put("content","恭喜猩宝宝报名成功！！！");
+        send.put("text",textObj);
+        logger.info("put"+send.toJSONString());
+        dealQueue.put(send);
+    }
+
+    public void returnArticleMsg(String content, String toUserName, String fromUserName) throws Exception{
+        JSONObject send = new JSONObject();
+        send.put("touser",fromUserName);
+        send.put("CreateTime",new Date().getTime());
+        send.put("msgtype","news");
+        JSONObject news =new JSONObject();
+        JSONArray articles =new JSONArray();
+        JSONObject list =new JSONObject();
+        list.put("title","【猩愿福利】又双叒叕是\"免费\"送 "); //标题
+        list.put("description","【猩愿福利】又双叒叕是\"免费\"送 "); //描述
+        list.put("url","https://mp.weixin.qq.com/s?__biz=MzU1ODU1ODEwNg==&tempkey=MTAwNF9uS3U2TGVwZnlFS0dwODVIWnMtMzFvMUd5Q1Z2dWNyS0NtWlVKYUo3QUVGWUhyWTRYQVNuOFVqOF9wOGFpeENkLUlpbk5BVWVvY3FmTFQ3UTBjNFAwUC1BdlpIMC16ZFg5SS13TDlrRElQLUJLanNpU3hybC1YNmVxcDFvSU0yNW45VXlRQ3NqeTd4LXRQMmhtbWw2Vzh2c0c0MURMRUd1NGhLbjZRfn4%3D&chksm=7c25fa564b527340d2cccac79d077058002488fd5d9f2facf82b4a2d509ab68d291a5dce0518#rd"); //点击图文链接跳转的地址
+        list.put("picurl","https://mmbiz.qpic.cn/mmbiz_jpg/GmQkkFCF21W1X74Sa9KOALaa1nx3MAe1NhLYvWR1RF7Kw0LFjey2plh2K5wzSHxdCd9s281uKRPxOorQbuhmyg/0?wx_fmt=jpeg"); //图文链接的图片
+        articles.add(list);
+        news.put("articles", articles);
+        send.put("news",news);
+        logger.info("put"+send.toJSONString());
+        dealQueue.put(send);
+    }
+
 
     private class MessageThread extends Thread{
         @Override
@@ -171,7 +236,6 @@ public class WxMsgService {
             logger.info("thread run");
             JSONObject jsonObject= null;
             try {
-
                 while ((jsonObject = dealQueue.take())!=null){
                     String json = jsonObject.toJSONString();
                     logger.info("收到消息:"+json);
@@ -181,7 +245,7 @@ public class WxMsgService {
                         String url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+token;
                         String str = OkhttpUtil.postJson(url,json);
                         logger.info(str);
-                    }else if (msgType.equals("image")){
+                    }else if (msgType.equals("news")){
                         String token = WxConfig.getAccessToken();
                         String url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+token;
                         String str = OkhttpUtil.postJson(url,json);

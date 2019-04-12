@@ -96,6 +96,7 @@ public class WxBaseApi {
             Map<String, String> result = WXPayUtil.xmlToMap(string);
             String msgType = result.get("MsgType");
             String toUserName = result.get("ToUserName");
+            logger.info(result);
             String fromUserName = result.get("FromUserName");
 
             if (msgType.equals("event")){
@@ -108,8 +109,15 @@ public class WxBaseApi {
                 }
             }else if (msgType.equals("text")){//接收消息
                 String content = result.get("Content");
-                if(!StringUtils.isEmpty(content)){//消息回复
-                    wxMsgService.returnMsg(content,toUserName,fromUserName);
+//                if(!StringUtils.isEmpty(content)){//消息回复
+//                    wxMsgService.returnMsg(content,toUserName,fromUserName);
+//                }
+                if(content.equals("猩愿福利")){
+                    wxMsgService.returnUserMsg(content,toUserName,fromUserName);
+                    wxMsgService.returnArticleMsg(content,toUserName,fromUserName);
+                }
+                if(content.equals("报名")){
+                    wxMsgService.returnUserBaoMingMsg(content,toUserName,fromUserName);
                 }
             }
           logger.info("发送："+xml);
