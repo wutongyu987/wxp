@@ -66,7 +66,8 @@ public class WxMsgService {
                     "商品种类繁多，\n" +
                     "其中不定时会在机器内\n" +
                     "出现不同的高价值产品");
-        }else if (eventKey.equals("custom")){//猩愿机客服信息
+        }else if (eventKey.equals("custom")){
+            //猩愿机客服信息
             xmlMap = new HashMap<>();
             xmlMap.put("ToUserName",toUserName);
             xmlMap.put("FromUserName",fromUserName);
@@ -78,7 +79,7 @@ public class WxMsgService {
                     "请联系客服人员我们随时在线");
         }
         String xml = WXPayUtil.mapToXml(xmlMap);
-        logger.info(xml);
+        logger.info("TEST++++++++"+xml);
         return xml;
     }
 

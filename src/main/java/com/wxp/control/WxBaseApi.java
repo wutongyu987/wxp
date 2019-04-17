@@ -4,7 +4,6 @@ import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.wxpay.sdk.WXPayUtil;
-import com.vdurmont.emoji.EmojiParser;
 import com.wxp.Config;
 import com.wxp.bean.BuyerBean;
 import com.wxp.bean.PrizeCodeBean;
@@ -26,11 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
 import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
-
 
 /**
  * create by ff on 2018/11/23
@@ -102,7 +97,6 @@ public class WxBaseApi {
             logger.info(result);
             String fromUserName = result.get("FromUserName");
 
-        logger.warn("!!!!!!!!!!!!!!"+fromUserName);
         wxPayService.pushUserRedPackage(fromUserName,request);
             if (msgType.equals("event")){
                 String event = result.get("Event");
