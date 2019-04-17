@@ -29,4 +29,6 @@ public interface PrizeLogDao {
 
     String getRedPackId(@Param("uid") String uid);
 
+    PrizeLogBean getPrizeLogByBuyerId(@Param("buyerId") String buyerId);
+
 }

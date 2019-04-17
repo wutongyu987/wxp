@@ -108,8 +108,8 @@ $(function() {
 								} else if(shwoResult === -1) {
 									$('.fail').css('visibility', 'inherit')
 								} else {
-									// $('.success').css('visibility', 'inherit')
-									window.location.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67cadbc58a45b2cd&redirect_uri=https%3a%2f%2fwww.xingyuanji.com%2fdist%2f%23%2fsign&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect')
+									$('.success').css('visibility', 'inherit')
+									// window.location.replace('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67cadbc58a45b2cd&redirect_uri=https%3a%2f%2fwww.xingyuanji.com%2fdist%2f%23%2fsign&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect')
 								}
 //								index++
 								sessionStorage.setItem('lotteryDrawIndex', index)

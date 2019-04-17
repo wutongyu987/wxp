@@ -15,6 +15,7 @@ import com.wxp.dao.BuyerDao;
 import com.wxp.dao.PrizeCodeDao;
 import com.wxp.service.BuyerService;
 import com.wxp.service.WxMsgService;
+import com.wxp.service.WxPayService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,8 @@ public class WxBaseApi {
     private WxMsgService wxMsgService;
     @Resource
     private BuyerDao buyerDao;
+    @Autowired
+    private WxPayService wxPayService;
 
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)
@@ -87,7 +90,7 @@ public class WxBaseApi {
      */
     @RequestMapping(value = "/connect",method = RequestMethod.POST)
     @ResponseBody
-    public Object connect(@RequestBody String string) throws Exception {
+    public Object connect(@RequestBody String string,HttpServletRequest request) throws Exception {
             logger.info("接收微信消息");
 //            接收的内容转码
             string = new String(string.getBytes("ISO-8859-1"), "UTF-8");
@@ -99,26 +102,28 @@ public class WxBaseApi {
             logger.info(result);
             String fromUserName = result.get("FromUserName");
 
+        logger.warn("!!!!!!!!!!!!!!"+fromUserName);
+        wxPayService.pushUserRedPackage(fromUserName,request);
             if (msgType.equals("event")){
                 String event = result.get("Event");
                 String eventKey = result.get("EventKey");
                 if (event.equals("subscribe")){//用户订阅公众号触发事件
-                    xml = wxMsgService.eventSubscribe(eventKey,toUserName,fromUserName);
+                    xml = wxMsgService.eventSubscribe(eventKey,toUserName,fromUserName,request);
                 }else if (event.equals("CLICK")){//菜单按钮点击事件
                     xml = wxMsgService.eventClick(eventKey,toUserName,fromUserName);
                 }
             }else if (msgType.equals("text")){//接收消息
                 String content = result.get("Content");
-//                if(!StringUtils.isEmpty(content)){//消息回复
-//                    wxMsgService.returnMsg(content,toUserName,fromUserName);
+                if(!StringUtils.isEmpty(content)){//消息回复
+                    wxMsgService.returnMsg(content,toUserName,fromUserName);
+                }
+//                if(content.equals("猩愿福利")){
+////                    wxMsgService.returnUserMsg(content,toUserName,fromUserName);
+////                    wxMsgService.returnArticleMsg(content,toUserName,fromUserName);
 //                }
-                if(content.equals("猩愿福利")){
-                    wxMsgService.returnUserMsg(content,toUserName,fromUserName);
-                    wxMsgService.returnArticleMsg(content,toUserName,fromUserName);
-                }
-                if(content.equals("报名")){
-                    wxMsgService.returnUserBaoMingMsg(content,toUserName,fromUserName);
-                }
+//                if(content.equals("报名")){
+//                    wxMsgService.returnUserBaoMingMsg(content,toUserName,fromUserName);
+//                }
             }
           logger.info("发送："+xml);
             return xml;

@@ -28,4 +28,7 @@ public interface BuyerDao  {
     void addPoint(@Param("totalFee") Integer totalFee, @Param("id") Integer id);
 
     void zan(Integer buyerId);
+
+    String getBuyerId(@Param("fromUserName") String fromUserName);
+
 }

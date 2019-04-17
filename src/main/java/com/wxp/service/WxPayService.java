@@ -7,11 +7,17 @@ import com.github.wxpay.sdk.WXPayConstants;
 import com.github.wxpay.sdk.WXPayUtil;
 import com.wxp.Config;
 import com.wxp.WxConfig;
+import com.wxp.bean.BuyerBean;
+import com.wxp.bean.PrizeLogBean;
+import com.wxp.dao.BuyerDao;
+import com.wxp.dao.PrizeLogDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 
 @Service
@@ -19,6 +25,10 @@ public class WxPayService {
 
     private WXPay wxPay = new WXPay(WxConfig.getPayInstance());
 
+    @Autowired
+    private PrizeLogDao prizeLogDao;
+    @Autowired
+    private BuyerDao buyerDao;
 
 
     /**
@@ -129,4 +139,10 @@ public class WxPayService {
         return ip.equals("0:0:0:0:0:0:0:1") ? "127.0.0.1" : ip;
     }
 
+    public void pushUserRedPackage(String fromUserName,HttpServletRequest request) throws Exception {
+
+        String buyerId = buyerDao.getBuyerId(fromUserName);
+        PrizeLogBean prizeLogBean = prizeLogDao.getPrizeLogByBuyerId(buyerId);
+        String result = sendRedPackage(String.valueOf(prizeLogBean.getId()),fromUserName,String.valueOf(prizeLogBean.getPrice()),request);
+    }
 }

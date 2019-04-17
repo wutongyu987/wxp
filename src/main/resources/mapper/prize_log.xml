@@ -105,6 +105,9 @@
     <select id="getRedPackId" resultType="java.lang.String">
         SELECT id FROM prize_log WHERE src_id = #{uid};
     </select>
+    <select id="getPrizeLogByBuyerId" resultType="com.wxp.bean.PrizeLogBean">
+        SELECT id,buyer_id,price FROM prize_log WHERE buyer_id = #{buyerId} ORDER BY insert_time DESC Limit 1;
+    </select>
 
 
 </mapper>

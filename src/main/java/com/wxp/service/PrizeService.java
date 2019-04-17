@@ -12,6 +12,7 @@ import com.wxp.dao.PrizeDao;
 import com.wxp.dao.PrizeLogDao;
 import org.apache.commons.collections.MapUtils;
 import org.apache.ibatis.annotations.Param;
+import org.apache.shiro.session.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -647,6 +648,7 @@ public class PrizeService {
         //保存用户信息
         prizeLogDao.save(prizeLogBean);
 
+
         if(prizeLogBean.getPrizeId() == 20 || prizeLogBean.getPrizeId() == 21 || prizeLogBean.getPrizeId() == 22 ||
          prizeLogBean.getPrizeId() == 23 || prizeLogBean.getPrizeId() == 24 || prizeLogBean.getPrizeId() == 25 ||
          prizeLogBean.getPrizeId() == 26 || prizeLogBean.getPrizeId() == 27 || prizeLogBean.getPrizeId() == 28
@@ -656,7 +658,9 @@ public class PrizeService {
         }else{
             return pId;
         }
+
     }
+
 
 
 

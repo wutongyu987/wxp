@@ -92,4 +92,9 @@
         AND open_id=#{openId}
     </select>
 
+
+    <select id="getBuyerId" resultType="java.lang.String">
+        SELECT id FROM buyer WHERE open_id = #{fromUserName} Limit 1;
+    </select>
+
 </mapper>
