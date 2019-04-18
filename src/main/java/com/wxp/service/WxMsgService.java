@@ -73,13 +73,12 @@ public class WxMsgService {
             xmlMap.put("FromUserName",fromUserName);
             xmlMap.put("CreateTime",currentTime+"");
             xmlMap.put("MsgType","text");
-            xmlMap.put("Content","客服联系电话：18112710926 \n" +
-                    "客服联系微信号：xyji1888 \n" +
+            xmlMap.put("Content","客服联系电话：400-780-8698 \n" +
+                    "客服联系微信号：xyji1888  \n" +
                     "如果您在使用猩愿机的过程中遇到任何问题\n" +
-                    "请联系客服人员我们随时在线");
+                    "请联系我们的客服人员");
         }
         String xml = WXPayUtil.mapToXml(xmlMap);
-        logger.info("TEST++++++++"+xml);
         return xml;
     }
 
