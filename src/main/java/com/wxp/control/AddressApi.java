@@ -31,6 +31,8 @@ public class AddressApi {
 
     @Resource
     private AddressDao addressDao;
+
+
     //保存用户地址
     @RequestMapping("/save")
     public Object saveAddress(@RequestBody AddressBean addressBean, HttpSession session){

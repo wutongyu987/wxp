@@ -35,9 +35,9 @@ import java.util.List;
 @RequestMapping("/prize")
 public class PrizeLogApi {
     Logger logger = Logger.getLogger(this.getClass().getName());
-    @Autowired
+    @Resource
     private PrizeService prizeService;
-    @Autowired
+    @Resource
     private WxPayService wxPayService;
     @Resource
     private AddressDao addressDao;

@@ -118,6 +118,8 @@ public class Config {
     public final static Integer REDPACKET_0_66=29;
     public final static double REDPACKET_0_66_PROBABILITY=0.602889;
 
+
+    public final static String JIN_YONG = "0";
     //公众号secret  ed3a5dbc1aafc037f9ecc1eccfe0a7e7
 
 //    个人

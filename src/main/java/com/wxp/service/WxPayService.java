@@ -11,23 +11,27 @@ import com.wxp.bean.BuyerBean;
 import com.wxp.bean.PrizeLogBean;
 import com.wxp.dao.BuyerDao;
 import com.wxp.dao.PrizeLogDao;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 
 @Service
 public class WxPayService {
 
+    org.apache.log4j.Logger logger = Logger.getLogger(this.getClass().getName());
     private WXPay wxPay = new WXPay(WxConfig.getPayInstance());
 
-    @Autowired
+    @Resource
     private PrizeLogDao prizeLogDao;
-    @Autowired
+    @Resource
     private BuyerDao buyerDao;
 
 
@@ -112,14 +116,12 @@ public class WxPayService {
         String respXml = wxPay.requestWithCert(url, data, 8000, 10000);
         Map<String, String> result = WXPayUtil.xmlToMap(respXml);
         String resultCode = "";
-        for(Map.Entry<String,String> entity : result.entrySet()){
-            if(entity.getKey().equals("result_code")){
+        for(Map.Entry<String,String> entity : result.entrySet()) {
+            if (entity.getKey().equals("result_code")) {
                 resultCode = entity.getValue();
             }
         }
-        System.out.println("发红包返回结果");
-        System.out.println(result);
-        System.out.println(JSON.toJSONString(result));
+        logger.info("<--发红包返回结果-->"+result+"\n"+new Date());
         return resultCode;
     }
 
@@ -139,10 +141,55 @@ public class WxPayService {
         return ip.equals("0:0:0:0:0:0:0:1") ? "127.0.0.1" : ip;
     }
 
-    public void pushUserRedPackage(String fromUserName,HttpServletRequest request) throws Exception {
+    public void pushUserRedPackage(String fromUserName,HttpServletRequest request){
+        try {
+            String buyerId = buyerDao.getBuyerId(fromUserName);
+            PrizeLogBean prizeLogBean = prizeLogDao.getPrizeLogByBuyerId(buyerId);
+            logger.info("<--GET_USER_PRIZR_LOG-->:"+"\tPRIZE_ID:\t"+prizeLogBean.getId()+"\tBUYER_ID:\t"+prizeLogBean.getBuyerId()+"\tPRIZE:\t"+prizeLogBean.getPrice());
+            String result = PushRedPackage(String.valueOf(prizeLogBean.getId()),fromUserName,String.valueOf(prizeLogBean.getPrice()),request);
 
-        String buyerId = buyerDao.getBuyerId(fromUserName);
-        PrizeLogBean prizeLogBean = prizeLogDao.getPrizeLogByBuyerId(buyerId);
-        String result = sendRedPackage(String.valueOf(prizeLogBean.getId()),fromUserName,String.valueOf(prizeLogBean.getPrice()),request);
+            if(result.equals("SUCCESS")){
+                prizeLogDao.updateCashPrizeLog(prizeLogBean.getId(),Config.JIN_YONG,new Date(),buyerId);
+                logger.info("<---PUSH_RED_PACKAGE--->:"+""+"\tOPENID:\t"+fromUserName+"\t"+"BUYER_ID:\t"+buyerId+"\tCASH:\t"+prizeLogBean.getPrice()+"\tDATE:\t"+new Date());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
+
+    private String PushRedPackage(String no, String openId, String amount, HttpServletRequest request) throws Exception{
+        Map<String, String> data = new HashMap<>();
+        String companyName = "猩愿机";
+        data.put("nonce_str",WXPayUtil.generateNonceStr());
+        data.put("mch_billno",no);//商户订单
+        data.put("mch_id",WxConfig.MCHID);
+        data.put("wxappid", Config.APPID);
+        data.put("send_name",companyName);
+        data.put("re_openid",openId);
+        data.put("total_amount",amount);//付款金额单位分
+        data.put("total_num","1");//发放人数
+        data.put("wishing","恭喜你获取红包奖励");
+        data.put("client_ip",getRemoteHost(request));
+        data.put("act_name","猩愿机抽奖活动");
+        data.put("remark","猜越多得越多，快来抢！");//备注
+        data.put("scene_id","PRODUCT_2");
+        data.put("sign",WXPayUtil.generateSignature(data, WxConfig.SECRET, WXPayConstants.SignType.MD5));//备注
+
+        String url = "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack";
+        String respXml = wxPay.requestWithCert(url, data, 8000, 10000);
+        Map<String, String> result = WXPayUtil.xmlToMap(respXml);
+        String resultCode = "";
+        for(Map.Entry<String,String> entity : result.entrySet()) {
+            if (entity.getKey().equals("result_code")) {
+                resultCode = entity.getValue();
+            }
+        }
+        logger.info("<--推送红包返回结果-->"+result+"\n"+new Date());
+        return resultCode;
+    }
+
+
+
+
 }

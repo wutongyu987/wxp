@@ -36,13 +36,13 @@ public class WxBaseApi {
 
     @Resource
     private PrizeCodeDao prizeCodeDao;
-    @Autowired
+    @Resource
     private BuyerService buyerService;
-    @Autowired
+    @Resource
     private WxMsgService wxMsgService;
     @Resource
     private BuyerDao buyerDao;
-    @Autowired
+    @Resource
     private WxPayService wxPayService;
 
 
@@ -85,7 +85,8 @@ public class WxBaseApi {
      */
     @RequestMapping(value = "/connect",method = RequestMethod.POST)
     @ResponseBody
-    public Object connect(@RequestBody String string,HttpServletRequest request) throws Exception {
+    public Object connect(@RequestBody String string,HttpServletRequest request) throws Exception{
+
             logger.info("接收微信消息");
 //            接收的内容转码
             string = new String(string.getBytes("ISO-8859-1"), "UTF-8");
@@ -96,8 +97,7 @@ public class WxBaseApi {
             String toUserName = result.get("ToUserName");
             logger.info(result);
             String fromUserName = result.get("FromUserName");
-
-        wxPayService.pushUserRedPackage(fromUserName,request);
+            wxPayService.pushUserRedPackage(fromUserName,request);
             if (msgType.equals("event")){
                 String event = result.get("Event");
                 String eventKey = result.get("EventKey");
@@ -119,8 +119,9 @@ public class WxBaseApi {
 //                    wxMsgService.returnUserBaoMingMsg(content,toUserName,fromUserName);
 //                }
             }
-          logger.info("发送："+xml);
+            logger.info("发送："+xml);
             return xml;
+
     }
 
     @RequestMapping("/towx/{id}")

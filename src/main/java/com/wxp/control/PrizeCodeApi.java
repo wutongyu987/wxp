@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/prizeCode")
 public class PrizeCodeApi {
 
-    @Autowired
+    @Resource
     private PrizeCodeService prizeCodeService;
 
     @Resource

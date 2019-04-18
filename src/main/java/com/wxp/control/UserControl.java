@@ -28,7 +28,7 @@ public class UserControl {
     Logger logger = Logger.getLogger(this.getClass().getName());
     @Resource
     private UserService userService;
-    @Autowired
+    @Resource
     private PrizeCodeService prizeCodeService;
 
     @RequestMapping(value = "/subLogin",method = RequestMethod.POST)

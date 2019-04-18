@@ -5,6 +5,7 @@ import com.wxp.bean.PrizeBean;
 import com.wxp.bean.PrizeLogBean;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,5 +31,7 @@ public interface PrizeLogDao {
     String getRedPackId(@Param("uid") String uid);
 
     PrizeLogBean getPrizeLogByBuyerId(@Param("buyerId") String buyerId);
+
+    void updateCashPrizeLog(@Param("id") Integer id,@Param("jinYong") String jinYong,@Param("date") Date date,@Param("buyerId") String buyerId);
 
 }

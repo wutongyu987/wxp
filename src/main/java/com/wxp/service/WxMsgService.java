@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,9 +31,9 @@ public class WxMsgService {
     private static LinkedBlockingQueue<JSONObject> dealQueue = new LinkedBlockingQueue<JSONObject>();
     private MessageThread messageThread = null;
 
-    @Autowired
+    @Resource
     private PrizeService prizeService;
-    @Autowired
+    @Resource
     private WxPayService wxPayService;
     /**
      * 回复按钮点击事件

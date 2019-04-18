@@ -42,6 +42,10 @@
         UPDATE prize_log set useflag = '0' WHERE id = #{logId} AND buyer_id = #{buyerId};
     </update>
 
+    <update id="updateCashPrizeLog">
+        UPDATE prize_log SET useflag = #{jinYong},update_id = #{buyerId},update_time = #{date} WHERE id = #{id};
+    </update>
+
 
     <!-- 单个查询 -->
     <select id="findById" resultType="PrizeLogBean">
@@ -105,8 +109,10 @@
     <select id="getRedPackId" resultType="java.lang.String">
         SELECT id FROM prize_log WHERE src_id = #{uid};
     </select>
+
     <select id="getPrizeLogByBuyerId" resultType="com.wxp.bean.PrizeLogBean">
-        SELECT id,buyer_id,price FROM prize_log WHERE buyer_id = #{buyerId} ORDER BY insert_time DESC Limit 1;
+        SELECT id,src_id,prize_id,price,buyer_id,address,adname,adphone,status,useflag,insert_time,
+         insert_id,update_time,update_id,city,post_code,province FROM prize_log WHERE buyer_id = #{buyerId} AND useflag = '1' ORDER BY insert_time DESC Limit 1;
     </select>
 
 
