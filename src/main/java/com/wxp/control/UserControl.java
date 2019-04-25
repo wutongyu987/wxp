@@ -1,7 +1,6 @@
 package com.wxp.control;
 
 import com.wxp.bean.User;
-import com.wxp.dao.PrizeCodeDao;
 import com.wxp.service.PrizeCodeService;
 import com.wxp.service.UserService;
 import org.apache.log4j.Logger;
@@ -9,12 +8,10 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 
 
