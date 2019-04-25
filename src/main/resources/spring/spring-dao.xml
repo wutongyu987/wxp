@@ -20,9 +20,9 @@
         <property name="filters" value="stat" />
 
         <!-- 配置初始化大小、最小、最大 -->
-        <property name="maxActive" value="20" />
-        <property name="initialSize" value="1" />
-        <property name="minIdle" value="1" />
+        <property name="maxActive" value="30" />
+        <property name="initialSize" value="20" />
+        <property name="minIdle" value="20" />
 
         <!-- 配置获取连接等待超时的时间 -->
         <property name="maxWait" value="60000" />
@@ -39,7 +39,7 @@
 
         <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
         <property name="poolPreparedStatements" value="true" />
-        <property name="maxOpenPreparedStatements" value="20" />
+        <property name="maxOpenPreparedStatements" value="30" />
     </bean>
 
     <!-- 3: 配置sqlSessionFactory对象-->

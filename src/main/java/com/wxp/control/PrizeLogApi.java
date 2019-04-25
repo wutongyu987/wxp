@@ -49,7 +49,6 @@ public class PrizeLogApi {
     public Object get(HttpSession session) throws Exception {
         BuyerBean buyerBean = (BuyerBean) session.getAttribute("buyer");
         logger.info("获取兑奖结果,用户:"+ JSON.toJSONString(buyerBean));
-
         String prizeUuid = (String) session.getAttribute("cjId");
         logger.info("兑奖uuid:"+ prizeUuid);
         if (prizeUuid==null){
@@ -105,7 +104,7 @@ public class PrizeLogApi {
                 prizeLogBean.getPrizeId()== Config.REDPACKET_0_66
                 ){
 //            测试关闭兑换
-            System.out.println("红包兑换:"+JSON.toJSONString(buyerBean)+" 兑奖信息："+JSON.toJSONString(prizeLogBean));
+            logger.info("红包兑换:"+JSON.toJSONString(buyerBean)+" 兑奖信息："+JSON.toJSONString(prizeLogBean));
             String resultCode= wxPayService.sendRedPackage(prizeLogBean.getId()+"",buyerBean.getOpenId(),prizeLogBean.getPrice()+"",request);
             //判断微信接口返回值
             if(resultCode.equals("SUCCESS")){

@@ -31,7 +31,6 @@ public class PrizeCodeService {
             PrizeCodeBean prizeCodeBean = new PrizeCodeBean();
             String uuid = UUID.randomUUID().toString().replaceAll("-", "");
             uuid = new SimpleHash("md5",uuid).toHex();
-            System.out.println(uuid);
             prizeCodeBean.setImg("https://www.xingyuanji.com/wxp/towx/");
             prizeCodeBean.setUid(uuid);
             prizeCodeBean.setStatus(0);

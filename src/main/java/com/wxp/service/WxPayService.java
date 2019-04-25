@@ -45,8 +45,7 @@ public class WxPayService {
         try {
             String tradeType = data.get("trade_type");
             Map<String, String> result = wxPay.unifiedOrder(data);//微信sdk，统一下单接口
-            System.out.println("统一下单结果");
-            System.out.println(JSON.toJSONString(result));
+            logger.info("统一下单结果"+JSON.toJSONString(result));
             if (!"SUCCESS".equals(result.get("result_code"))){
                 jsonObject.put("object",result);
                 jsonObject.put("msg","统一下单失败");

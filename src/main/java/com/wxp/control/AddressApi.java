@@ -63,7 +63,6 @@ public class AddressApi {
         Map<String,Object> condition = new HashMap<>();
         condition.put("buyerId",buyerBean.getId());
         List list = addressDao.query(condition);
-        System.out.print(JsonUtil.genSuccess(list));
         return JsonUtil.genSuccess(list);
     }
 

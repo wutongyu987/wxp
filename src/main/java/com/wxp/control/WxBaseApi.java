@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -126,7 +127,7 @@ public class WxBaseApi {
 
     @RequestMapping("/towx/{id}")
     public String toWx(@PathVariable("id") String id){
-        logger.info("扫码code:"+id);
+        logger.info("扫码code:"+"/t"+id+"/t"+new Date());
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67cadbc58a45b2cd&redirect_uri=https%3a%2f%2fwww.xingyuanji.com%2fwxp%2flogin&response_type=code&scope=snsapi_userinfo&state="+id+"#wechat_redirect";
         return "redirect:"+url;
     }
@@ -148,6 +149,7 @@ public class WxBaseApi {
         return "Invalid";
         }
         session.setAttribute("cjId",state);
+        session.setMaxInactiveInterval(2*60);
         login(code,session);
         return "cj";
     }
@@ -155,7 +157,6 @@ public class WxBaseApi {
 //    用户信息界面
     @RequestMapping("/account")
     public Object getAccount(String code,String state, HttpSession session) throws UnsupportedEncodingException {
-        logger.info("微信公众号登录"+code+":::state"+state);
         login(code,session);
         return "my";
     }
@@ -167,7 +168,6 @@ public class WxBaseApi {
                 + "&secret=" + Config.SECRET + "&code=" + code
                 + "&grant_type=authorization_code";
         String str = OkhttpUtil.get(url);
-        System.out.println(str);
         JSONObject jsonObject = JSON.parseObject(str);
         String accessToken = jsonObject.getString("access_token");
         String openId = jsonObject.getString("openid");
@@ -187,6 +187,8 @@ public class WxBaseApi {
             buyerBean = buyerService.login(buyerBean);
         }
         session.setAttribute("buyer",buyerBean);
+        session.setMaxInactiveInterval(2*60);
+        logger.info("<--USER_LOGIN->"+buyerBean.getId()+"/t"+buyerBean.getNickName()+"/t"+new Date());
     }
 
 }

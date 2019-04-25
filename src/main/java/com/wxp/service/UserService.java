@@ -39,7 +39,6 @@ public class UserService {
         PasswordUtil.encryptPassword(user);//生成数据库密码
         user.setLocked("1");
         boolean result = userDAO.createUser(user);
-        System.out.println("create:"+result);
         return user;
     }
 
