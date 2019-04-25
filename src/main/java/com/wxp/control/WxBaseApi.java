@@ -16,7 +16,6 @@ import com.wxp.service.BuyerService;
 import com.wxp.service.WxMsgService;
 import com.wxp.service.WxPayService;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
